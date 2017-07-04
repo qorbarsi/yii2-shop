@@ -19,7 +19,7 @@ class Module extends \yii\base\Module
     const EVENT_PRODUCT_CREATE = 'create_product';
     const EVENT_PRODUCT_DELETE = 'delete_product';
     const EVENT_PRODUCT_UPDATE = 'update_product';
-    
+
     public function init()
     {
         if(!$this->userModel) {
@@ -27,7 +27,7 @@ class Module extends \yii\base\Module
                 $this->userModel = $user::className();
             }
         }
-        
+
         if(is_callable($this->users)) {
             $func = $this->users;
             $this->users = $func();
@@ -38,5 +38,23 @@ class Module extends \yii\base\Module
         }
 
         parent::init();
+        $this->registerTranslations();
+    }
+    
+    public function registerTranslations()
+    {
+        Yii::$app->i18n->translations['dvizh/shop'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'sourceLanguage' => 'ru',
+            'basePath' => __DIR__.'/messages',
+            'fileMap' => [
+                'dvizh/shop' => 'shop.php',
+            ],
+        ];
+    }
+
+    public static function t($category, $message, $params = [], $language = null)
+    {
+        return Yii::t('dvizh/' . $category, $message, $params, $language);
     }
 }
