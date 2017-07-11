@@ -8,6 +8,7 @@ use dvizh\shop\models\Producer;
 use dvizh\gallery\widgets\Gallery;
 use kartik\select2\Select2;
 use dvizh\seo\widgets\SeoForm;
+use dvizh\shop\Module;
 
 \dvizh\shop\assets\BackendAsset::register($this);
 ?>
@@ -15,13 +16,13 @@ use dvizh\seo\widgets\SeoForm;
 <div class="product-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    
+
     <div class="row">
         <div class="col-lg-8 col-xs-6">
             <?= $form->field($model, 'name')->textInput() ?>
         </div>
         <div class="col-lg-3 col-xs-4">
-            <?= $form->field($model, 'slug')->textInput(['placeholder' => 'Не обязательно']) ?>
+            <?= $form->field($model, 'slug')->textInput(['placeholder' => Module::t('shop','Не обязательно')]) ?>
         </div>
         <div class="col-lg-1 col-xs-4">
             <?= $form->field($model, 'amount')->textInput() ?>
@@ -39,23 +40,23 @@ use dvizh\seo\widgets\SeoForm;
             <?= $form->field($model, 'barcode')->textInput() ?>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-lg-2 col-xs-2 available-radio-block">
             <?php if($model->isNewRecord) $model->available = 'yes'; ?>
-            <?= $form->field($model, 'available')->radioList(['yes' => 'Да','no' => 'Нет']); ?>
+            <?= $form->field($model, 'available')->radioList(['yes' => Module::t('shop','Да'),'no' => Module::t('shop','Нет')]); ?>
         </div>
         <div class="col-lg-2 col-xs-2 isnew-radio-block">
             <?php if($model->isNewRecord) $model->is_new = 'no'; ?>
-            <?= $form->field($model, 'is_new')->radioList(['yes' => 'Да','no' => 'Нет']); ?>
+            <?= $form->field($model, 'is_new')->radioList(['yes' => Module::t('shop','Да'),'no' => Module::t('shop','Нет')]); ?>
         </div>
         <div class="col-lg-2 col-xs-2 ispopular-radio-block">
             <?php if($model->isNewRecord) $model->is_popular = 'no'; ?>
-            <?= $form->field($model, 'is_popular')->radioList(['yes' => 'Да','no' => 'Нет']); ?>
+            <?= $form->field($model, 'is_popular')->radioList(['yes' => Module::t('shop','Да'),'no' => Module::t('shop','Нет')]); ?>
         </div>
         <div class="col-lg-2 col-xs-2 ispromo-radio-block">
             <?php if($model->isNewRecord) $model->is_promo = 'no'; ?>
-            <?= $form->field($model, 'is_promo')->radioList(['yes' => 'Да','no' => 'Нет']); ?>
+            <?= $form->field($model, 'is_promo')->radioList(['yes' => Module::t('shop','Да'),'no' => Module::t('shop','Нет')]); ?>
         </div>
         <div class="col-lg-2 col-xs-2 sort-input-block">
             <?= $form->field($model, 'sort')->textInput() ?>
@@ -68,17 +69,17 @@ use dvizh\seo\widgets\SeoForm;
                 ->widget(Select2::classname(), [
                 'data' => Category::buildTextTree(),
                 'language' => 'ru',
-                'options' => ['placeholder' => 'Выберите категорию ...'],
+                'options' => ['placeholder' => Module::t('shop','Выберите категорию')],
                 'pluginOptions' => [
                     'allowClear' => true
                 ],
             ]); ?>
-            
+
             <?= $form->field($model, 'producer_id')
                 ->widget(Select2::classname(), [
                 'data' => ArrayHelper::map(Producer::find()->all(), 'id', 'name'),
                 'language' => 'ru',
-                'options' => ['placeholder' => 'Выберите бренд ...'],
+                'options' => ['placeholder' => Module::t('shop','Выберите производителя')],
                 'pluginOptions' => [
                     'allowClear' => true
                 ],
@@ -86,11 +87,11 @@ use dvizh\seo\widgets\SeoForm;
         </div>
         <div class="col-lg-6 col-xs-6">
             <?= $form->field($model, 'category_ids')
-                ->label('Прочие категории')
+                ->label(Module::t('shop','Прочие категории'))
                 ->widget(Select2::classname(), [
                 'data' => Category::buildTextTree(),
                 'language' => 'ru',
-                'options' => ['multiple' => true, 'placeholder' => 'Доп. категории ...'],
+                'options' => ['multiple' => true, 'placeholder' => Module::t('shop','Доп. категории ...')],
                 'pluginOptions' => [
                     'allowClear' => true
                 ],
@@ -118,12 +119,12 @@ use dvizh\seo\widgets\SeoForm;
     <br />
 
     <?= SeoForm::widget([
-        'model' => $model, 
+        'model' => $model,
         'form' => $form,
     ]); ?>
-    
+
     <div class=" panel panel-default related-products-block">
-        <div class="panel-heading"><strong>Связанные продукты</strong></div>
+        <div class="panel-heading"><strong><?= Module::t('shop','Связанные продукты') ?></strong></div>
         <div class="panel-body">
             <?=\dvizh\relations\widgets\Constructor::widget(['model' => $model]);?>
         </div>
@@ -131,17 +132,17 @@ use dvizh\seo\widgets\SeoForm;
 
     <?php if(isset($priceTypes)) { ?>
         <?php if($priceTypes) { ?>
-            <h3>Цены</h3>
+            <h3><?= Module::t('shop','Цены') ?></h3>
             <?php $i = 1; foreach($priceTypes as $priceType) { ?>
                 <?= $form->field($priceModel, "[{$priceType->id}]price")->label($priceType->name); ?>
             <?php $i++; } ?>
         <?php } ?>
     <?php } ?>
-    
+
     <div class="form-group shop-control">
-        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Module::t('shop','Добавить') : Module::t('shop','Обновить'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?php if(!$model->isNewRecord) { ?>
-            <a class="btn btn-default" href="<?=Url::toRoute(['product/delete', 'id' => $model->id]);?>" title="Удалить" aria-label="Удалить" data-confirm="Вы уверены, что хотите удалить этот элемент?" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+            <a class="btn btn-default" href="<?=Url::toRoute(['product/delete', 'id' => $model->id]);?>" title="<?= Module::t('shop','Удалить') ?>" aria-label="<?= Module::t('shop','Удалить') ?>" data-confirm="<?= Module::t('shop','Вы уверены, что хотите удалить этот элемент?') ?>" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
         <?php } ?>
     </div>
 

@@ -1,9 +1,10 @@
 <?php
 use yii\helpers\Html;
+use dvizh\shop\Module;
 
-$this->title = 'Обновить категорию: ' . ' ' . $model->name;
+$this->title = Module::t('shop','Обновить категорию: {name}', ['name' => $model->name]);
 $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];
-$this->params['breadcrumbs'][] = 'Обновить';
+$this->params['breadcrumbs'][] = Module::t('shop','Обновить');
 \dvizh\shop\assets\BackendAsset::register($this);
 ?>
 <div class="category-update">
@@ -18,5 +19,5 @@ $this->params['breadcrumbs'][] = 'Обновить';
             <?=$fieldPanel;?>
         </div>
     <?php } ?>
-    
+
 </div>

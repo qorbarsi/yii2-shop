@@ -2,10 +2,11 @@
 namespace dvizh\shop\models;
 
 use Yii;
+use dvizh\shop\Module;
 
 class Incoming extends \yii\db\ActiveRecord
 {
-    
+
     public static function tableName()
     {
         return '{{%shop_incoming}}';
@@ -24,16 +25,16 @@ class Incoming extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
-    
+
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'date' => 'Дата',
-            'product_id' => 'Товар',
-            'amount' => 'Кол-во',
-            'price' => 'Цена',
-            'content' => 'Комментарий',
+            'id'         => Module::t('shop','ID'),
+            'date'       => Module::t('shop','Дата'),
+            'product_id' => Module::t('shop','Товар'),
+            'amount'     => Module::t('shop','Кол-во'),
+            'price'      => Module::t('shop','Цена'),
+            'content'    => Module::t('shop','Комментарий'),
         ];
     }
 }

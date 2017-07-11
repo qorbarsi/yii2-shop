@@ -5,9 +5,10 @@ use yii\helpers\ArrayHelper;
 use dvizh\shop\models\Category;
 use dvizh\shop\models\Producer;
 use kartik\export\ExportMenu;
+use dvizh\shop\Module;
 
-$this->title = 'Товары';
-$this->params['breadcrumbs'][] = ['label' => 'Магазин', 'url' => ['/shop/default/index']];
+$this->title = Module::t('shop','Товары');
+$this->params['breadcrumbs'][] = ['label' => Module::t('shop','Магазин'), 'url' => ['/shop/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 \dvizh\shop\assets\BackendAsset::register($this);
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-md-2">
-            <?= Html::a('Добавить товар', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a(Module::t('shop','Добавить товар'), ['create'], ['class' => 'btn btn-success']) ?>
         </div>
         <div class="col-md-2">
             <?php
@@ -42,10 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 </button>
                 <ul class="dropdown-menu dvizh-model-control">
                     <li data-action="edit">
-                        <a data-toggle="modal" data-target="#modal-control-model" data-model="<?= $dataProvider->query->modelClass ?>" class="dvizh-mass-edit" href="#">Редактиовать выбранные</a>
+                        <a data-toggle="modal" data-target="#modal-control-model" data-model="<?= $dataProvider->query->modelClass ?>" class="dvizh-mass-edit" href="#"><?= Module::t('shop','Редактиовать выбранные') ?></a>
                     </li>
                     <li data-action="delete" >
-                        <a  data-model="<?= $dataProvider->query->modelClass ?>" data-action="<?= Url::to(['/shop/product/mass-deletion']) ?>" class="dvizh-mass-delete" href="#">Удалить выбранные</a>
+                        <a  data-model="<?= $dataProvider->query->modelClass ?>" data-action="<?= Url::to(['/shop/product/mass-deletion']) ?>" class="dvizh-mass-delete" href="#"><?= Module::t('shop','Удалить выбранные') ?></a>
                     </li>
                 </ul>
             </div>
@@ -91,7 +92,7 @@ echo \kartik\grid\GridView::widget([
             'filter' => Html::activeDropDownList(
                 $searchModel,
                 'available',
-                ['no' => 'Нет', 'yes' => 'Да'],
+                ['no' => Module::t('shop','Нет'), 'yes' => Module::t('shop','Да')],
                 ['class' => 'form-control', 'prompt' => 'Наличие']
             ),
         ],
@@ -101,7 +102,7 @@ echo \kartik\grid\GridView::widget([
                 $searchModel,
                 'category_id',
                 Category::buildTextTree(),
-                ['class' => 'form-control', 'prompt' => 'Категория']
+                ['class' => 'form-control', 'prompt' => Module::t('shop','Выберите категорию')]
             ),
             'value' => 'category.name'
         ],
@@ -111,7 +112,7 @@ echo \kartik\grid\GridView::widget([
                 $searchModel,
                 'producer_id',
                 ArrayHelper::map(Producer::find()->orderBy('name')->all(), 'id', 'name'),
-                ['class' => 'form-control', 'prompt' => 'Производитель']
+                ['class' => 'form-control', 'prompt' => Module::t('shop','Выберите производителя')]
             ),
             'value' => 'producer.name'
         ],

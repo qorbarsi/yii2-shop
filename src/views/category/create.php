@@ -1,8 +1,9 @@
 <?php
 use yii\helpers\Html;
+use dvizh\shop\Module;
 
-$this->title = 'Создать категорию';
-$this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];
+$this->title = Module::t('shop','Создать категорию');
+$this->params['breadcrumbs'][] = ['label' => Module::t('shop','Категории'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \dvizh\shop\assets\BackendAsset::register($this);
 ?>

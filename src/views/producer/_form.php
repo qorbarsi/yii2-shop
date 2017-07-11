@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use dvizh\gallery\widgets\Gallery;
 use kartik\select2\Select2;
 use dvizh\seo\widgets\SeoForm;
+use dvizh\shop\Module;
 
 ?>
 
@@ -15,7 +16,7 @@ use dvizh\seo\widgets\SeoForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'slug')->textInput(['maxlength' => true, 'placeholder' => 'Не обязательно']) ?>
+    <?= $form->field($model, 'slug')->textInput(['maxlength' => true, 'placeholder' => Module::t('shop','Не обязательно')]) ?>
 
     <?php echo $form->field($model, 'text')->widget(
         \yii\imperavi\Widget::className(),
@@ -29,16 +30,16 @@ use dvizh\seo\widgets\SeoForm;
             ]
         ]
     ) ?>
-	
+
     <?=Gallery::widget(['model' => $model]); ?>
 
     <?= SeoForm::widget([
-        'model' => $model, 
+        'model' => $model,
         'form' => $form,
     ]); ?>
-	
+
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Module::t('shop','Создать') : Module::t('shop','Изменить'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

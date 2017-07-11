@@ -5,6 +5,7 @@ use Yii;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use dvizh\shop\models\product\ProductQuery;
+use dvizh\shop\Module;
 
 class Product extends \yii\db\ActiveRecord implements \dvizh\relations\interfaces\Torelate, \dvizh\cart\interfaces\CartElement
 {
@@ -79,7 +80,7 @@ class Product extends \yii\db\ActiveRecord implements \dvizh\relations\interface
             'producer_id' => Module::t('shop','Производитель'),
             'name'        => Module::t('shop','Название'),
             'amount'      => Module::t('shop','Остаток'),
-            'text'        => Module::t('shop','Текст'),
+            'text'        => Module::t('shop','Описание'),
             'short_text'  => Module::t('shop','Короткий текст'),
             'images'      => Module::t('shop','Картинки'),
             'available'   => Module::t('shop','В наличии'),
@@ -87,7 +88,7 @@ class Product extends \yii\db\ActiveRecord implements \dvizh\relations\interface
             'is_popular'  => Module::t('shop','Популярное'),
             'is_promo'    => Module::t('shop','Акция'),
             'sort'        => Module::t('shop','Сортировка'),
-            'slug'        => Module::t('shop','СЕО-имя'),
+            'slug'        => Module::t('shop','SEO имя'),
             'amount_in_stock' => Module::t('shop','Количество на складах'),
         ];
     }

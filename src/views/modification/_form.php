@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dvizh\shop\models\PriceType;
 use dvizh\shop\models\Price;
+use dvizh\shop\Module;
 
 $priceTypes = PriceType::find()->all();
 $priceModel = new Price;
@@ -35,7 +36,7 @@ $priceModel = new Price;
             <p>Значения задаются в <?=Html::a('фильтрах', ['/filter/filter/index'], ['target' => '_blank']);?>. В настоящий момент к категории продукта не привязано ни одного фильтра.</p>
         <?php } ?>
     </fieldset>
-        
+
     <fieldset>
         <legend>2. Задайте параметры модификации</legend>
         <?= $form->field($model, 'product_id')->textInput(['type' => 'hidden'])->label(false) ?>
@@ -83,7 +84,7 @@ $priceModel = new Price;
             <?php } ?>
         <div>
     </fieldset>
-    
+
     <div class="form-group" style="text-align: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

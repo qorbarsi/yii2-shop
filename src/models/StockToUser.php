@@ -4,15 +4,16 @@ namespace dvizh\shop\models;
 use Yii;
 use yii\helpers\Url;
 use yii\db\ActiveQuery;
+use dvizh\shop\Module;
 
 class StockToUser extends \yii\db\ActiveRecord
 {
-    
+
     public static function tableName()
     {
         return '{{%shop_stock_to_user}}';
     }
-    
+
     public function rules()
     {
         return [
@@ -24,9 +25,9 @@ class StockToUser extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'Пользователь',
-            'stock_id' => 'Склад',
+            'id'       => Module::t('shop','ID'),
+            'user_id'  => Module::t('shop','Пользователь'),
+            'stock_id' => Module::t('shop','Склад'),
         ];
     }
 }

@@ -1,8 +1,9 @@
 <?php
 use yii\helpers\Html;
+use dvizh\shop\Module;
 
-$this->title = 'Создать тип цен';
-$this->params['breadcrumbs'][] = ['label' => 'Типы', 'url' => ['index']];
+$this->title = Module::t('shop','Создать тип цен');
+$this->params['breadcrumbs'][] = ['label' => Module::t('shop','Типы'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \dvizh\shop\assets\BackendAsset::register($this);
 ?>

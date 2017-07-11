@@ -3,6 +3,7 @@ namespace dvizh\shop\models;
 
 use yii\helpers\Url;
 use Yii;
+use dvizh\shop\Module;
 
 class Producer extends \yii\db\ActiveRecord
 {
@@ -49,19 +50,19 @@ class Producer extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Название производителя',
-            'text' => 'Текст',
-            'image' => 'Картинка',
-            'slug' => 'SEO Имя',
+            'id'    => Module::t('shop','ID'),
+            'name'  => Module::t('shop','Название производителя'),
+            'text'  => Module::t('shop','Описание'),
+            'image' => Module::t('shop','Картинка'),
+            'slug'  => Module::t('shop','SEO имя'),
         ];
     }
-    
+
      public function getLink() {
         return Url::toRoute(['/producer/view/', 'slug' => $this->slug]);
     }
-    
-    
+
+
     public function getByProducts($productFind)
     {
         $return = new Producer;

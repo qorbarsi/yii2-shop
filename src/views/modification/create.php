@@ -1,5 +1,7 @@
 <?php
-$this->title = 'Добавить модификацию';
+use dvizh\shop\Module;
+
+$this->title = Module::t('shop','Добавить модификацию');
 
 \dvizh\shop\assets\ModificationConstructAsset::register($this);
 ?>

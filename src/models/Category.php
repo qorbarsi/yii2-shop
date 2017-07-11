@@ -4,6 +4,7 @@ namespace dvizh\shop\models;
 use Yii;
 use dvizh\shop\models\category\CategoryQuery;
 use yii\helpers\Url;
+use dvizh\shop\Module;
 
 class Category extends \yii\db\ActiveRecord
 {
@@ -25,12 +26,12 @@ class Category extends \yii\db\ActiveRecord
             ],
         ];
     }
-    
+
     public static function tableName()
     {
         return '{{%shop_category}}';
     }
-    
+
     static function find()
     {
         return new CategoryQuery(get_called_class());
@@ -49,55 +50,55 @@ class Category extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'parent_id' => 'Родительская категория',
-            'name' => 'Имя категории',
-            'slug' => 'Сео имя',
-            'text' => 'Описание',
-            'image' => 'Картинка',
-            'sort' => 'Сортировка',
-            'description' => 'Описание',
+            'id'          => Module::t('shop','ID'),
+            'parent_id'   => Module::t('shop','Родительская категория'),
+            'name'        => Module::t('shop','Имя категории'),
+            'slug'        => Module::t('shop','SEO имя'),
+            'text'        => Module::t('shop','Описание'),
+            'image'       => Module::t('shop','Картинка'),
+            'sort'        => Module::t('shop','Сортировка'),
+            'description' => Module::t('shop','Описание'),
         ];
     }
-    
+
     public static function buildTree($parent_id = null)
     {
         $return = [];
-        
+
         if(empty($parent_id)) {
             $categories = Category::find()->where('parent_id = 0 OR parent_id is null')->orderBy('sort DESC')->asArray()->all();
         } else {
             $categories = Category::find()->where(['parent_id' => $parent_id])->orderBy('sort DESC')->asArray()->all();
         }
-        
+
         foreach($categories as $level1) {
             $return[$level1['id']] = $level1;
             $return[$level1['id']]['childs'] = self::buildTree($level1['id']);
         }
-        
+
         return $return;
     }
-    
+
     public static function buildTextTree($id = null, $level = 1, $ban = [])
     {
         $return = [];
-        
+
         $prefix = str_repeat('--', $level);
         $level++;
-        
+
         if(empty($id)) {
             $categories = Category::find()->where('parent_id = 0 OR parent_id is null')->orderBy('sort DESC')->asArray()->all();
         } else {
             $categories = Category::find()->where(['parent_id' => $id])->orderBy('sort DESC')->asArray()->all();
         }
-        
+
         foreach($categories as $category) {
             if(!in_array($category['id'], $ban)) {
                 $return[$category['id']] = "$prefix {$category['name']}";
                 $return = $return + self::buildTextTree($category['id'], $level, $ban);
             }
         }
-        
+
         return $return;
     }
 
@@ -106,7 +107,7 @@ class Category extends \yii\db\ActiveRecord
         return $this->hasMany(Product::className(), ['id' => 'product_id'])
              ->viaTable('{{%shop_product_to_category}}', ['category_id' => 'id'])->available();
     }
-    
+
     public function getChilds()
     {
         return $this->hasMany(Category::className(), ['parent_id' => 'id']);
@@ -116,7 +117,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'parent_id']);
     }
-    
+
     public function getLink()
     {
         return Url::toRoute([yii::$app->getModule('shop')->categoryUrlPrefix, 'slug' => $this->slug]);

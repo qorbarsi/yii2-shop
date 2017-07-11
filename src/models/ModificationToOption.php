@@ -2,6 +2,7 @@
 namespace dvizh\shop\models;
 
 use Yii;
+use dvizh\shop\Module;
 
 class ModificationToOption extends \yii\db\ActiveRecord
 {
@@ -9,7 +10,7 @@ class ModificationToOption extends \yii\db\ActiveRecord
     {
         return '{{%shop_product_modification_to_option}}';
     }
-    
+
     public function rules()
     {
         return [
@@ -21,10 +22,10 @@ class ModificationToOption extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'modification_id' => 'Модификация',
-            'option_id' => 'Опция',
-            'variant_id' => 'Значение',
+            'id'              => Module::t('shop','ID'),
+            'modification_id' => Module::t('shop','Модификация'),
+            'option_id'       => Module::t('shop','Опция'),
+            'variant_id'      => Module::t('shop','Значение'),
         ];
     }
 }

@@ -7,6 +7,7 @@ use dvizh\shop\models\Category;
 use dvizh\gallery\widgets\Gallery;
 use kartik\select2\Select2;
 use dvizh\seo\widgets\SeoForm;
+use dvizh\shop\Module;
 
 ?>
 
@@ -15,11 +16,11 @@ use dvizh\seo\widgets\SeoForm;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput() ?>
-    
-    <?= $form->field($model, 'slug')->textInput(['placeholder' => 'Не обязательно']) ?>
-	
+
+    <?= $form->field($model, 'slug')->textInput(['placeholder' => Module::t('shop','Не обязательно')]) ?>
+
 	<?= $form->field($model, 'sort')->textInput() ?>
-	
+
     <?php echo $form->field($model, 'text')->widget(
         \yii\imperavi\Widget::className(),
         [
@@ -32,26 +33,26 @@ use dvizh\seo\widgets\SeoForm;
             ]
         ]
     ) ?>
-    
+
     <?= $form->field($model, 'parent_id')
             ->widget(Select2::classname(), [
                 'data' => Category::buildTextTree(null, 1, [$model->id]),
                 'language' => 'ru',
-                'options' => ['placeholder' => 'Выберите категорию ...'],
+                'options' => ['placeholder' => Module::t('shop','Выберите категорию ...')],
                 'pluginOptions' => [
                     'allowClear' => true
                 ],
             ]); ?>
-    
+
     <?=Gallery::widget(['model' => $model]);?>
 
     <?=\dvizh\seo\widgets\SeoForm::widget([
-        'model' => $model, 
-        'form' => $form, 
+        'model' => $model,
+        'form' => $form,
     ]); ?>
-        
+
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Module::t('shop','Создать') : Module::t('shop','Изменить'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

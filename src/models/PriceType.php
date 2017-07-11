@@ -2,6 +2,7 @@
 namespace dvizh\shop\models;
 
 use yii;
+use dvizh\shop\Module;
 
 class PriceType extends \yii\db\ActiveRecord
 {
@@ -23,10 +24,10 @@ class PriceType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Название',
-            'sort' => 'Сортировка',
-            'condition' => 'Условие',
+            'id'        => Module::t('shop','ID'),
+            'name'      => Module::t('shop','Название'),
+            'sort'      => Module::t('shop','Сортировка'),
+            'condition' => Module::t('shop','Условие'),
         ];
     }
 }

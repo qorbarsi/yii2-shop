@@ -6,8 +6,9 @@ use yii\helpers\Url;
 use kartik\select2\Select2;
 use dvizh\shop\models\Product;
 use dvizh\shop\models\PriceType;
+use dvizh\shop\Module;
 
-$this->title = 'Новое поступление';
+$this->title = Module::t('shop','Новое поступление');
 $this->params['breadcrumbs'][] = $this->title;
 
 \dvizh\shop\assets\CreateIncomingAsset::register($this);
@@ -22,18 +23,18 @@ foreach(PriceType::find()->all() as $priceType) {
 $this->registerJs(
     "
     dvizh.createincoming.shopPriceTypesArray = ".json_encode($priceTypes)."
-    
+
     $('.incoming-delete').on('click', function() {
-        
+
     });
-    
+
     $('.incoming select[name=incomingproduct]').on('change', function() {
         $('.new-input').val($(this).val()).change();
     });"
 );
 ?>
 <div class="incoming-create">
-    
+
     <?php if(Yii::$app->session->hasFlash('success')) { ?>
         <div class="alert alert-success" role="alert">
             <?= Yii::$app->session->getFlash('success') ?>
@@ -49,25 +50,25 @@ $this->registerJs(
                             'data' => ArrayHelper::map(Product::find()->all(), 'id', 'name'),
                             'name' => 'incomingproduct',
                             'language' => 'ru',
-                            'options' => ['placeholder' => 'Выберите товар ...'],
+                            'options' => ['placeholder' => Module::t('shop','Выберите товар ...')],
                             'pluginOptions' => [
                                 'allowClear' => true
                             ],
                         ]); ?>
                     </div>
                 </div>
-                <div class="col-lg-6"><input class="new-input" data-info-service="<?=Url::toRoute(['/shop/product/product-info']);?>" type="text" value="" placeholder="Код или артикул + Enter" style="width: 300px;" /></div>
+                <div class="col-lg-6"><input class="new-input" data-info-service="<?=Url::toRoute(['/shop/product/product-info']);?>" type="text" value="" placeholder="<?= Module::t('shop','Код или артикул + Enter') ?>" style="width: 300px;" /></div>
             </div>
         </div>
         <div id="incoming-list" style="width: 800px; padding: 20px;">
         </div>
 
         <div class="form-group">
-            <textarea name="content" class="form-control" placeholder="Комментарий"></textarea>
+            <textarea name="content" class="form-control" placeholder="<?= Module::t('shop','Комментарий') ?>"></textarea>
         </div>
-        
+
         <div class="form-group">
-            <?= Html::submitButton('Добавить поступление', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton(Module::t('shop','Добавить поступление'), ['class' => 'btn btn-success']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 </div>

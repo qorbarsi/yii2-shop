@@ -2,10 +2,11 @@
 namespace dvizh\shop\models;
 
 use Yii;
+use dvizh\shop\Module;
 
 class Outcoming extends \yii\db\ActiveRecord
 {
-    
+
     public static function tableName()
     {
         return '{{%shop_outcoming}}';
@@ -22,9 +23,9 @@ class Outcoming extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'date' => 'Дата',
-            'content' => 'Содержание заказа',
+            'id'      => Module::t('shop','ID'),
+            'date'    => Module::t('shop','Дата'),
+            'content' => Module::t('shop','Содержание заказа'),
         ];
     }
 }

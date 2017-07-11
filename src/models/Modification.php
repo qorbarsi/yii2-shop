@@ -5,6 +5,7 @@ use Yii;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\behaviors\TimestampBehavior;
+use dvizh\shop\Module;
 
 class Modification extends \yii\db\ActiveRecord implements \dvizh\cart\interfaces\CartElement
 {
@@ -36,12 +37,12 @@ class Modification extends \yii\db\ActiveRecord implements \dvizh\cart\interface
             ],
         ];
     }
-    
+
     public static function tableName()
     {
         return '{{%shop_product_modification}}';
     }
-    
+
     public function rules()
     {
         return [
@@ -56,20 +57,20 @@ class Modification extends \yii\db\ActiveRecord implements \dvizh\cart\interface
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'product_id' => 'Товар',
-            'name' => 'Название',
-            'code' => 'Идентификатор',
-            'sku'  => 'Артикул',
-            'barcode' => 'Штрихкод',
-            'images' => 'Картинки',
-            'available' => 'В наличии',
-            'sort' => 'Сортировка',
-            'slug' => 'СЕО-имя',
-            'amount' => 'Остаток',
-            'create_time' => 'Дата создания',
-            'update_time' => 'Дата обновления',
-            'filter_values' => 'Сочетание значений фильтров',
+            'id'            => Module::t('shop','ID'),
+            'product_id'    => Module::t('shop','Товар'),
+            'name'          => Module::t('shop','Название'),
+            'code'          => Module::t('shop','Идентификатор'),
+            'sku'           => Module::t('shop','Артикул'),
+            'barcode'       => Module::t('shop','Штрихкод'),
+            'images'        => Module::t('shop','Картинки'),
+            'available'     => Module::t('shop','В наличии'),
+            'sort'          => Module::t('shop','Сортировка'),
+            'slug'          => Module::t('shop','SEO имя'),
+            'amount'        => Module::t('shop','Остаток'),
+            'create_time'   => Module::t('shop','Дата создания'),
+            'update_time'   => Module::t('shop','Дата обновления'),
+            'filter_values' => Module::t('shop','Сочетание значений фильтров'),
         ];
     }
 
@@ -77,23 +78,23 @@ class Modification extends \yii\db\ActiveRecord implements \dvizh\cart\interface
     {
         return ArrayHelper::map(ModificationToOption::find()->where(['modification_id' => $this->id])->all(), 'variant_id', 'variant_id');
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function minusAmount($count)
     {
         $this->amount = $this->amount-$count;
-        
+
         return $this->save(false);
     }
-    
+
     public function plusAmount($count)
     {
         $this->amount = $this->amount+$count;
-        
+
         return $this->save(false);
     }
 
@@ -173,12 +174,12 @@ class Modification extends \yii\db\ActiveRecord implements \dvizh\cart\interface
     {
         return $this->id;
     }
-    
+
     public function getCartName()
     {
         return $this->name;
     }
-    
+
     public function getCartPrice()
     {
         return $this->price;
@@ -188,12 +189,12 @@ class Modification extends \yii\db\ActiveRecord implements \dvizh\cart\interface
     {
         return '';
     }
-    
+
     public function getName()
     {
         return $this->name;
     }
-    
+
     public function getSellModel()
     {
         return $this;
@@ -207,7 +208,7 @@ class Modification extends \yii\db\ActiveRecord implements \dvizh\cart\interface
         Price::deleteAll(["item_id" => $this->id, 'type' => self::PRICE_TYPE]);
     }
 
-    public static function editField($id, $name, $value) 
+    public static function editField($id, $name, $value)
     {
         $setting = Modification::findOne($id);
         $setting->$name = $value;

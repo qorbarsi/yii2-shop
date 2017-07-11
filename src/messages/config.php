@@ -13,7 +13,7 @@ return [
     'color' => null,
     'interactive' => true,
     'help' => null,
-    'sourcePath' => dirname(__DIR__),
+    'sourcePath' => dirname(dirname(__DIR__)),
     #'messagePath' => '@yii/messages',
     'messagePath' => __DIR__,
     'languages' => ['ru', 'lt' ],
