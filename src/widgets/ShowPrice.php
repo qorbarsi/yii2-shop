@@ -10,6 +10,10 @@ class ShowPrice extends \yii\base\Widget
     public $model = NULL;
     public $htmlTag = 'span';
     public $cssClass = '';
+    public $templateOldNew = '{oldPrice} {price}';
+    public $cssClassOldNew = 'discount';
+    public $template = '{price}';
+    public $currency = '';
 
     public function init()
     {
@@ -24,9 +28,16 @@ class ShowPrice extends \yii\base\Widget
 
         $this->getView()->registerJs($js);
 
+        $oldPrice = $this->model->getOldPrice();
+
+        $oldNew = !empty($this->templateOldNew) && !empty($oldPrice);
+
+        $this->template = $oldNew ? $this->templateOldNew : $this->template;
+        $this->cssClass = $oldNew ? $this->cssClass." ".$this->cssClassOldNew : $this->cssClass;
+
         return Html::tag(
                 $this->htmlTag,
-                $this->model->getPrice(),
+                strtr($this->template, ['{oldPrice}' => $oldPrice.$this->currency, '{price}' => $this->model->getPrice().$this->currency ]),
                 ['class' => "dvizh-shop-price dvizh-shop-price-{$this->model->id} {$this->cssClass}"]
             );
     }
