@@ -11,5 +11,18 @@ class Bootstrap implements BootstrapInterface
         if(!$app->has('shop')) {
             $app->set('shop', ['class' => 'dvizh\shop\Shop']);
         }
+
+        if (!isset($app->get('i18n')->translations['dvizh/shop'])) {
+
+            $app->get('i18n')->translations['dvizh/shop'] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'sourceLanguage' => 'ru',
+                'basePath' => __DIR__.'/messages',
+                'fileMap' => [
+                    'dvizh/shop' => 'shop.php',
+                ],
+            ];
+        }
+
     }
 }
