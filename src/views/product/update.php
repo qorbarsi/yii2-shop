@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
-use dosamigos\grid\EditableColumn;
+use dosamigos\grid\columns\EditableColumn;
 
 $this->title = Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Товар', 'url' => ['index']];
@@ -196,7 +196,7 @@ $this->params['breadcrumbs'][] = 'Обновить';
             <?= $this->render('price/_form', [
                 'model' => $priceModel,
                 'productModel' => $model,
-            ]) ?> 
+            ]) ?>
         </div>
 
         <div class="tab-pane" id="product-filters">
