@@ -37,14 +37,14 @@ use dvizh\shop\Module;
     <?= $form->field($model, 'parent_id')
             ->widget(Select2::classname(), [
                 'data' => Category::buildTextTree(null, 1, [$model->id]),
-                'language' => 'ru',
+                //'language' => 'ru',
                 'options' => ['placeholder' => Module::t('shop','Выберите категорию ...')],
                 'pluginOptions' => [
                     'allowClear' => true
                 ],
             ]); ?>
 
-    <?=Gallery::widget(['model' => $model]);?>
+    <?=Gallery::widget(['model' => $model, 'label' => Module::t('shop','Изображения')]);?>
 
     <?=\dvizh\seo\widgets\SeoForm::widget([
         'model' => $model,

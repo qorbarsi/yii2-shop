@@ -34,7 +34,7 @@ class Price extends \yii\db\ActiveRecord implements \dvizh\cart\interfaces\CartE
             'code'      => Module::t('shop','Артикул'),
             'available' => Module::t('shop','Наличие'),
             'amount'    => Module::t('shop','Остаток'),
-            'sort'      => Module::t('shop','Приоритет'),
+            'sort'      => Module::t('shop','Сортировка'),
         ];
     }
 

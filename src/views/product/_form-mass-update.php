@@ -10,8 +10,9 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use dvizh\shop\Module;
 
-$this->title = 'Массовое редактирование продукции';
+$this->title = Module::t('shop','Массовое редактирование продукции');
 \dvizh\shop\assets\BackendAsset::register($this);
 ?>
 <div class="product-mass">
@@ -19,14 +20,14 @@ $this->title = 'Массовое редактирование продукции
         <div class="product-form-mass">
             <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
             <div>
-                <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
-                <?= Html::tag('a', 'Отмена', ['class' => 'btn', 'href' => 'index']) ?>
+                <?= Html::submitButton(Module::t('shop','Сохранить'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::tag('a', Module::t('shop','Отмена'), ['class' => 'btn', 'href' => 'index']) ?>
             </div>
 
             <?php foreach ($models as $key => $model) { ?>
                 <div class="row">
                     <div class="id-item-mass">
-                        <b>Название:</b> <?= $model->name ?>
+                        <b><?= Module::t('shop','Название: ') ?></b> <?= $model->name ?>
                         <b>ID товара:</b> <?= $model->id ?>
                     </div>
                     <?php if (!empty($filters)) { ?>
@@ -34,8 +35,8 @@ $this->title = 'Массовое редактирование продукции
                             <?php if ($filterPanel = \dvizh\filter\widgets\Choice::widget(['model' => $model, 'includeId' => $filters])) { ?>
                                 <?= $filterPanel; ?>
                             <?php } else { ?>
-                                <p>В настоящий момент к категории данного товара не привязан ни один фильтр. Управлять
-                                    фильтрами можно <?= Html::a('здесь', ['/filter/filter/index']); ?>.</p>
+                                <p><?= Module::t('shop','В настоящий момент к категории данного товара не привязан ни один фильтр. Управлять
+                                    фильтрами можно ') ?><?= Html::a('здесь', ['/filter/filter/index']); ?>.</p>
                             <?php } ?>
                         </div>
                     <?php } ?>
@@ -44,7 +45,7 @@ $this->title = 'Массовое редактирование продукции
                             <?php if ($fieldPanel = \dvizh\field\widgets\Choice::widget(['model' => $model, 'includeId' => $fields])) { ?>
                                 <?= $fieldPanel; ?>
                             <?php } else { ?>
-                                <p>Поля не заданы. Задать можно <?= Html::a('здесь', ['/field/field/index']); ?>.</p>
+                                <p><?= Module::t('shop','Поля не заданы. Задать можно ') ?> <?= Html::a(Module::t('shop','здесь'), ['/field/field/index']); ?>.</p>
                             <?php } ?>
                         </div>
                     <?php } ?>
@@ -60,7 +61,7 @@ $this->title = 'Массовое редактирование продукции
                     <?php } ?>
                     <?php if (isset($attributes['slug'])) { ?>
                         <div class="col-sm-4">
-                            <?= $form->field($model, "[{$model->id}][Product]slug")->textInput(['placeholder' => 'Не обязательно']) ?>
+                            <?= $form->field($model, "[{$model->id}][Product]slug")->textInput(['placeholder' => Module::t('shop','Не обязательно')]) ?>
                         </div>
                     <?php } ?>
                     <?php if (isset($attributes['amount'])) { ?>
@@ -81,8 +82,8 @@ $this->title = 'Массовое редактирование продукции
                             <?= $form->field($model, 'category_id')
                                 ->widget(Select2::classname(), [
                                     'data' => Category::buildTextTree(),
-                                    'language' => 'ru',
-                                    'options' => ['placeholder' => 'Выберите категорию ...'],
+                                    //'language' => 'ru',
+                                    'options' => ['placeholder' => Module::t('shop','Выберите категорию ...')],
                                     'pluginOptions' => [
                                         'allowClear' => true
                                     ],
@@ -95,8 +96,8 @@ $this->title = 'Массовое редактирование продукции
                             <?= $form->field($model, 'producer_id')
                                 ->widget(Select2::classname(), [
                                     'data' => ArrayHelper::map(Producer::find()->all(), 'id', 'name'),
-                                    'language' => 'ru',
-                                    'options' => ['placeholder' => 'Выберите бренд ...'],
+                                    //'language' => 'ru',
+                                    'options' => ['placeholder' => Module::t('shop','Выберите бренд ...')],
                                     'pluginOptions' => [
                                         'allowClear' => true
                                     ],
@@ -109,36 +110,36 @@ $this->title = 'Массовое редактирование продукции
                 <div class="row">
                     <?php if (isset($attributes['available'])) { ?>
                         <div class="col-xs-6 col-sm-3 col-md-2">
-                            <?= $form->field($model, "[{$model->id}][Product]available")->radioList(['yes' => 'Да', 'no' => 'Нет']); ?>
+                            <?= $form->field($model, "[{$model->id}][Product]available")->radioList(['yes' => Module::t('shop','Да'), 'no' => Module::t('shop','Нет')]); ?>
                         </div>
                     <?php } ?>
 
                     <?php if (isset($attributes['is_new'])) { ?>
                         <div class="col-xs-6 col-sm-3 col-md-2">
-                            <?= $form->field($model, "[{$model->id}][Product]is_new")->radioList(['yes' => 'Да', 'no' => 'Нет']); ?>
+                            <?= $form->field($model, "[{$model->id}][Product]is_new")->radioList(['yes' => Module::t('shop','Да'), 'no' => Module::t('shop','Нет')]); ?>
                         </div>
                     <?php } ?>
 
                     <?php if (isset($attributes['is_popular'])) { ?>
                         <div class="col-xs-6 col-sm-3 col-md-2">
-                            <?= $form->field($model, "[{$model->id}][Product]is_popular")->radioList(['yes' => 'Да', 'no' => 'Нет']); ?>
+                            <?= $form->field($model, "[{$model->id}][Product]is_popular")->radioList(['yes' => Module::t('shop','Да'), 'no' => Module::t('shop','Нет')]); ?>
                         </div>
                     <?php } ?>
                     <?php if (isset($attributes['is_promo'])) { ?>
                         <div class="col-xs-6 col-sm-3 col-md-2">
-                            <?= $form->field($model, "[{$model->id}][Product]is_promo")->radioList(['yes' => 'Да', 'no' => 'Нет']); ?>
+                            <?= $form->field($model, "[{$model->id}][Product]is_promo")->radioList(['yes' => Module::t('shop','Да'), 'no' => Module::t('shop','Нет')]); ?>
                         </div>
                     <?php } ?>
 
                     <?php if (isset($attributes['is_custom'])) { ?>
                         <div class="col-xs-6 col-sm-3 col-md-2">
-                            <?= $form->field($model, "[{$model->id}][Product]is_custom")->radioList(['yes' => 'Да', 'no' => 'Нет']); ?>
+                            <?= $form->field($model, "[{$model->id}][Product]is_custom")->radioList(['yes' => Module::t('shop','Да'), 'no' => Module::t('shop','Нет')]); ?>
                         </div>
                     <?php } ?>
 
                     <?php if (isset($attributes['is_sale'])) { ?>
                         <div class="col-xs-6 col-sm-3 col-md-2">
-                            <?= $form->field($model, "[{$model->id}][Product]is_sale")->radioList(['yes' => 'Да', 'no' => 'Нет']); ?>
+                            <?= $form->field($model, "[{$model->id}][Product]is_sale")->radioList(['yes' => Module::t('shop','Да'), 'no' => Module::t('shop','Нет')]); ?>
                         </div>
                     <?php } ?>
                 </div>
@@ -231,14 +232,14 @@ $this->title = 'Массовое редактирование продукции
                                 ],
                             ]); ?>
                         <?php } else { ?>
-                            <p style="color: red;">У товара нет цен.</p>
+                            <p style="color: red;"><?= Module::t('shop','У товара нет цен.') ?></p>
                         <?php } ?>
                     <?php } ?>
                 </div>
                 <hr>
             <?php } ?>
-            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
-            <?= Html::tag('a', 'Отмена', ['class' => 'btn', 'href' => 'index']) ?>
+            <?= Html::submitButton(Module::t('shop','Сохранить'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::tag('a', Module::t('shop','Отмена'), ['class' => 'btn', 'href' => 'index']) ?>
             <?php $form = ActiveForm::end(); ?>
         </div>
     <?php } ?>

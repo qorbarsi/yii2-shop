@@ -10,7 +10,7 @@ use dvizh\shop\Module;
 /* @var $model common\models\ProductOption */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<a href="#" class="btn btn-success" onclick="$('.product-add-price-form').toggle(); return false;">Добавить <span class="glyphicon glyphicon-plus add-price"></span></a>
+<a href="#" class="btn btn-success" onclick="$('.product-add-price-form').toggle(); return false;"><?= Module::t('shop','Добавить') ?> <span class="glyphicon glyphicon-plus add-price"></span></a>
 <div class="product-add-price-form" style="display: none;">
 
     <?php $form = ActiveForm::begin(['action' => Url::toRoute(['price/create'])]); ?>

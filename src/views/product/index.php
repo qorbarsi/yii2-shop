@@ -76,7 +76,7 @@ echo \kartik\grid\GridView::widget([
         'code',
         'amount',
         [
-            'label' => 'Цена',
+            'label' => Module::t('shop','Цена'),
             'content' => function ($model) {
                 $return = '';
 
@@ -93,8 +93,14 @@ echo \kartik\grid\GridView::widget([
                 $searchModel,
                 'available',
                 ['no' => Module::t('shop','Нет'), 'yes' => Module::t('shop','Да')],
-                ['class' => 'form-control', 'prompt' => 'Наличие']
+                ['class' => 'form-control', 'prompt' => Module::t('shop','Наличие')]
             ),
+            'value' => function($model) {
+                if ( $model->available == 'yes' ) {
+                    return Module::t('shop','Да');
+                }
+                return Module::t('shop','Нет');
+            }
         ],
         [
             'attribute' => 'category_id',
@@ -194,8 +200,8 @@ echo \kartik\grid\GridView::widget([
                                 <?php } ?>
                                 <div class="col-sm-12">
                                     <p class="cm-check-items-group">
-                                        <a class="cm-check-items cm-on" data-type="more-fields">Выбрать все</a> |
-                                        <a class="cm-check-items cm-off" data-type="more-fields">Снять выделение со всех</a>
+                                        <a class="cm-check-items cm-on" data-type="more-fields"><?= Module::t('shop','Выбрать все') ?></a> |
+                                        <a class="cm-check-items cm-off" data-type="more-fields"><?= Module::t('shop','Снять выделение со всех') ?></a>
                                     </p>
                                 </div>
                             </div>
@@ -204,7 +210,7 @@ echo \kartik\grid\GridView::widget([
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?= Module::t('shop','Отмена') ?></button>
                 <button type="button" data-action="<?= Url::to(['/shop/product/mass-update']) ?>" data-model="<?= $dataProvider->query->modelClass ?>" class="btn btn-primary pistoll88-shop-edit-mass-form">Редактировать выбранные</button>
             </div>
         </div>

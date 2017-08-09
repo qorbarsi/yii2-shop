@@ -3,20 +3,21 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use dosamigos\grid\columns\EditableColumn;
+use dvizh\shop\Module;
 
 $this->title = Html::encode($model->name);
-$this->params['breadcrumbs'][] = ['label' => 'Товар', 'url' => ['index']];
-$this->params['breadcrumbs'][] = 'Обновить';
+$this->params['breadcrumbs'][] = ['label' => Module::t('shop','Товар'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = Module::t('shop','Обновить');
 \dvizh\shop\assets\BackendAsset::register($this);
 ?>
 <div class="product-update">
 
     <ul class="nav nav-tabs">
-        <li class="active product-tab-label"><a href="#product-product" data-toggle="tab">Карточка товара</a></li>
-        <li class="options-tab-label"><a href="#product-modifications" data-toggle="tab">Модификации</a></li>
-        <li class="prices-tab-label" ><a href="#product-prices" data-toggle="tab">Цены</a></li>
-        <li class="filters-tab-label"><a href="#product-filters" data-toggle="tab">Фильтры</a></li>
-        <li class="addfileds-tab-label"><a href="#product-fields" data-toggle="tab">Доп. поля</a></li>
+        <li class="active product-tab-label"><a href="#product-product" data-toggle="tab"><?= Module::t('shop','Карточка товара') ?></a></li>
+        <li class="options-tab-label"><a href="#product-modifications" data-toggle="tab"><?= Module::t('shop','Модификации') ?></a></li>
+        <li class="prices-tab-label" ><a href="#product-prices" data-toggle="tab"><?= Module::t('shop','Цены') ?></a></li>
+        <li class="filters-tab-label"><a href="#product-filters" data-toggle="tab"><?= Module::t('shop','Фильтры') ?></a></li>
+        <li class="addfileds-tab-label"><a href="#product-fields" data-toggle="tab"><?= Module::t('shop','Доп. поля') ?></a></li>
     </ul>
 
     <div class="tab-content product-updater">
@@ -79,7 +80,7 @@ $this->params['breadcrumbs'][] = 'Обновить';
                     [
                         'class' => EditableColumn::className(),
                         'attribute' => 'price',
-                        'label' => 'Цена',
+                        'label' => Module::t('shop','Цена'),
                         'url' => ['/shop/modification/edit-field'],
                         'type' => 'text',
                         'editableOptions' => [
@@ -92,7 +93,7 @@ $this->params['breadcrumbs'][] = 'Обновить';
                         'attribute' => 'oldPrice',
                         'url' => ['/shop/modification/edit-field'],
                         'type' => 'text',
-                        'label' => 'Старая цена',
+                        'label' =>  Module::t('shop','Старая цена'),
                         'editableOptions' => [
                             'mode' => 'inline',
                         ],
@@ -108,13 +109,13 @@ $this->params['breadcrumbs'][] = 'Обновить';
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Товары</h4>
+                            <h4 class="modal-title"><?=  Module::t('shop','Товары') ?></h4>
                         </div>
                         <div class="modal-body">
                             <iframe src="<?=Url::toRoute(['/shop/modification/add-popup', 'productId' => $model->id]);?>" id="modification-add-window"></iframe>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= Module::t('shop','Закрыть') ?></button>
                         </div>
                     </div>
                 </div>
@@ -191,7 +192,7 @@ $this->params['breadcrumbs'][] = 'Обновить';
                     ],
                 ]); ?>
             <?php } else { ?>
-                <p style="color: red;">У товара нет цен.</p>
+                <p style="color: red;"><?= Module::t('shop','У товара нет цен.') ?></p>
             <?php } ?>
             <?= $this->render('price/_form', [
                 'model' => $priceModel,
@@ -203,7 +204,7 @@ $this->params['breadcrumbs'][] = 'Обновить';
             <?php if($filterPanel = \dvizh\filter\widgets\Choice::widget(['model' => $model])) { ?>
                 <?=$filterPanel;?>
             <?php } else { ?>
-                <p>В настоящий момент к категории данного товара не привязан ни один фильтр. Управлять фильтрами можно <?=Html::a('здесь', ['/filter/filter/index']);?>.</p>
+                <p><?= Module::t('shop','В настоящий момент к категории данного товара не привязан ни один фильтр. Управлять фильтрами можно ') ?><?=Html::a(Module::t('shop','здесь'), ['/filter/filter/index']);?>.</p>
             <?php } ?>
         </div>
 
@@ -212,7 +213,7 @@ $this->params['breadcrumbs'][] = 'Обновить';
             <?php if($fieldPanel = \dvizh\field\widgets\Choice::widget(['model' => $model])) { ?>
                 <?=$fieldPanel;?>
             <?php } else { ?>
-                <p>Поля не заданы. Задать можно <?=Html::a('здесь', ['/field/field/index']);?>.</p>
+                <p><?= Module::t('shop','Поля не заданы. Задать можно ') ?> <?=Html::a(Module::t('shop','здесь'), ['/field/field/index']);?>.</p>
             <?php } ?>
         </div>
     </div>

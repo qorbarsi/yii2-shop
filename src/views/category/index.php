@@ -65,6 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'image',
                     'format' => 'image',
+                    'label'  => Module::t('shop','Изображения'),
                     'filter' => false,
                     'content' => function ($image) {
                         if($image = $image->getImage()->getUrl('50x50')) {

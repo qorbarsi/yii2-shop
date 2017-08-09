@@ -68,7 +68,7 @@ use dvizh\shop\Module;
             <?= $form->field($model, 'category_id')
                 ->widget(Select2::classname(), [
                 'data' => Category::buildTextTree(),
-                'language' => 'ru',
+                //'language' => 'ru',
                 'options' => ['placeholder' => Module::t('shop','Выберите категорию')],
                 'pluginOptions' => [
                     'allowClear' => true
@@ -114,7 +114,7 @@ use dvizh\shop\Module;
 
     <?= $form->field($model, 'short_text')->textInput(['maxlength' => true]) ?>
 
-	<?=Gallery::widget(['model' => $model]); ?>
+	<?=Gallery::widget(['model' => $model , 'label' => Module::t('shop','Изображения')]); ?>
 
     <br />
 
