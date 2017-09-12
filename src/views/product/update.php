@@ -3,7 +3,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use dosamigos\grid\columns\EditableColumn;
+<<<<<<< HEAD
 use dvizh\shop\Module;
+=======
+>>>>>>> dvizh/master
 
 $this->title = Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => Module::t('shop','Товар'), 'url' => ['index']];

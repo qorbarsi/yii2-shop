@@ -9,7 +9,7 @@ dvizh.modificationconstruct = {
     dvizhShopUpdatePriceUrl: null,
     init: function() {
         $(document).on('change', '.product-add-modification-form .filters select', this.generateName);
-        
+
         $(document).on("beforeChangeCartElementOptions", function(e, modelId) {
             dvizh.modificationconstruct.setModification(modelId);
         });
@@ -42,7 +42,7 @@ dvizh.modificationconstruct = {
                 name = name+' '+val;
             }
         });
-        
+
         if(name != '') {
             $('#modification-name').val(name);
         }
